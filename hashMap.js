@@ -1,10 +1,12 @@
 class HashMap {
     #bucket;
     #length;
+    #bucketSize;
     
-    constructor(size = 16) {
-        this.#bucket = new Array(size);
-        this.#length = 0;
+    constructor(bucketSize = 16) {
+      this.#bucket = Array.from({ length: bucketSize }, () => []);
+      this.#length = 0;
+      this.#bucketSize = bucketSize;
     }
    
     hash(key) {
@@ -18,4 +20,33 @@ class HashMap {
      
         return hashCode;
       } 
+
+      
+
+      set(key, value) {
+       const index = this.hash(key);
+       const bucket = this.#bucket[index];
+
+       for(let i = 0; i < bucket.length; i++) {
+           if(bucket[i].index === key) {
+            bucket[i].value = value;
+            return;
+           }
+
+           bucket.push({key, value});
+           this.#length++;
+       }
+      }
+
+      get(key) {
+        const index = this.hash(key);
+        const bucket = this.#bucket[index];
+
+        for(let i = 0; i < bucket.length; i++) {
+          if(bucket[i].index === key) {
+           return bucket[i].value ;
+          }
+      }
+      return null;
+}
 }
