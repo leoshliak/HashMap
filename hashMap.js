@@ -20,15 +20,13 @@ class HashMap {
      
         return hashCode;
       } 
-
       
-
-      set(key, value) {
+set(key, value) {
        const index = this.hash(key);
        const bucket = this.#bucket[index];
 
        for(let i = 0; i < bucket.length; i++) {
-           if(bucket[i].index === key) {
+           if(bucket[i].key === key) {
             bucket[i].value = value;
             return;
            }
@@ -43,7 +41,7 @@ class HashMap {
         const bucket = this.#bucket[index];
 
         for(let i = 0; i < bucket.length; i++) {
-          if(bucket[i].index === key) {
+          if(bucket[i].key === key) {
            return bucket[i].value ;
           }
       }
