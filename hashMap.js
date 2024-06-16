@@ -75,7 +75,41 @@ class HashMap {
   length() {
     return this.#length;
   }
-}
 
+  clear() {
+    this.#bucket = Array.from({ length: this.#bucketSize }, () => []);
+    this.#length = 0;
+  }
+
+  keys() {
+    let keys = [];
+    for (let i = 0; i < this.#bucketSize; i++) {
+      this.#bucket[i].forEach((keyValue) => {
+        keys.push(keyValue.key);
+      });
+    }
+    return keys;
+  }
+
+  values() {
+    let values = [];
+    for (let i = 0; i < this.#bucketSize; i++) {
+      this.#bucket[i].forEach((keyValue) => {
+        values.push(keyValue.value);
+      });
+    }
+    return keys;
+  }
+
+  entries() {
+    let entries = [];
+    for (let i = 0; i < this.#bucketSize; i++) {
+      this.#bucket[i].forEach((keyValue) => {
+        entries.push([keyValue.key, keyValue.value]);
+      });
+    }
+    return entries;
+  }
+}
 
 
